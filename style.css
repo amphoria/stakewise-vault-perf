@@ -1,4 +1,5 @@
 body {
+    width: 650px;
     margin: 0;
     padding-left: 20px;
     background: #29282A;
@@ -9,26 +10,70 @@ body {
 h1 {
     color: #059669;
     margin-bottom: 50px;
+    text-align: center;
 }
 
 h4 {
     color: #059669;
 }
 
-#rewards-list {
-    list-style-type: none;
+form {
+    display: flex;
+    flex-direction: column;
+    max-width: 500px;
+    margin-left: 50px;
+    padding: 10px 20px;
+    border: 2px solid green;
+    border-radius: 5px;
 }
 
-#input-el {
-    width: 500px;
+.form-label {
+    color: #059669;
+    margin: 5px 0;
+}
+
+.form-el {
+    margin-bottom: 10px;
     padding: 10px 20px;
     background: #474649;
     color: white;
 }
 
-#button-div {
-    margin-top: 50px;
-    margin-bottom: 40px;
+.form-buttons {
+    display: flex;
+    justify-content: center;
+}
+
+.form-btn {
+    width: 150px;
+    background: #474649;
+    color: white;
+    padding: 10px 0;
+    border-radius: 8px;
+    font-weight: bold;
+    margin: 10px;
+    cursor: pointer;
+}
+
+.form-btn:disabled {
+    color: gray;
+    cursor: default;
+}
+
+.vault-selector {
+    height: 130px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#vault-el {
+    width: 600px;
+    margin-top: 25px;
+    padding: 10px 10px;
+    background: #474649;
+    color: white;
 }
 
 .buttons {
@@ -38,29 +83,11 @@ h4 {
     padding: 10px 0;
     border-radius: 8px;
     font-weight: bold;
-}
-
-#update-btn {
-    margin-left: 20px;
-}
-
-.buttons:hover {
     cursor: pointer;
 }
 
-#balances {
-    display: flex;
-    flex-direction: column;
-    color: white;
-}
-
-.balance {
-    display: flex;
-    padding-left: 20px;
-    padding-bottom: 15px;
-}
-
-.bal-label {
-    width: 180px;
+.results {
+    margin-left: 40px;
+    margin-top: 40px;
 }
 

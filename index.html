@@ -6,12 +6,39 @@
     </head>
     <body>
         <h1>Stakewise Vault Performance</h1>
-        <input type="text" id="input-el" value="0xAC0F906E433d58FA868F936E8A43230473652885">
-        <button class="buttons" id="update-btn">Update</button>
-        <p id="consensus-rewards-earned"></p>
-        <p id="consensus-rewards-missed"></p>
-        <p id="execution-mev-earned"></p>
-        <p id="execution-mev-missed"></p>
+        <form>
+            <label class="form-label" for="vault-name">Vault name:</label>
+            <input 
+                class="form-el" 
+                type="text" 
+                id="vault-name" 
+                name="vault-name" 
+                placeholder="Vault name"
+            >
+            <label class="form-label" for="vault-address">Vault address:</label>
+            <input
+                class="form-el" 
+                type="text" 
+                id="vault-address" 
+                name="vault-address" 
+                placeholder="Vault address"
+            >
+            <div class="form-buttons">
+                <button type="submit" class="form-btn" id="submit-btn" disabled>Add</button>
+                <button class="form-btn" id="delete-btn" disabled>Delete</button>
+            </div>
+        </form>
+        <div class="vault-selector">
+            <select name="vault-el" id="vault-el">
+            </select>
+            <button class="buttons" id="update-btn">Update</button>
+        </div>
+        <div class="results">
+            <p id="consensus-rewards-earned"></p>
+            <p id="consensus-rewards-missed"></p>
+            <p id="execution-mev-earned"></p>
+            <p id="execution-mev-missed"></p>
+            </div>
         <script type="module" src="/index.js"></script>    
     </body>
 </html>
