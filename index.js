@@ -101,10 +101,6 @@ async function getPositionData() {
 
     total.innerText = `Total: ${ethers.formatEther(output.total)}`
     withdrawable.innerText = `Withdrawable: ${output.withdrawable}`
-    console.log(output.positions)
-//     exitQueueIndex.innerText = `Exit Queue Index: ${output.positions[0].exitQueueIndex}`
-//     positionTicket.innerText = `Position Ticket: ${output.positions[0].positionTicket}`
-//     timestamp.innerText = `Timestamp: ${output.positions[0].timestamp}`
 }
 
 function setupInputs() {
