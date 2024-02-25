@@ -13,7 +13,7 @@
     "vite-plugin-graphql-loader": "^2.0.0"
   },
   "dependencies": {
-    "@stakewise/v3-sdk": "file:stakewise-v3-sdk-1.0.7.tgz",
+    "@stakewise/v3-sdk": "file:stakewise-v3-sdk-1.1.0.tgz",
     "ethers": "^6.9.2"
   }
 }

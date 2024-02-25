@@ -14,10 +14,11 @@ const deleteBtn = document.getElementById('delete-btn')
 const vaultEl = document.getElementById('vault-el')
 const updateBtn = document.getElementById('update-btn')
 
-const consensusRewardsEarned = document.getElementById('consensus-rewards-earned')
-const consensusRewardsMissed = document.getElementById('consensus-rewards-missed')
-const executonMevEarned = document.getElementById('execution-mev-earned')
-const executonMevMissed = document.getElementById('execution-mev-missed')
+const total = document.getElementById('total')
+const withdrawable = document.getElementById('withdrawable')
+const exitQueueIndex = document.getElementById('exit-queue-index')
+const positionTicket = document.getElementById('position-ticket')
+const timestamp = document.getElementById('timestamp')
 
 const genesisVaultAddress = '0xAC0F906E433d58FA868F936E8A43230473652885'
 
@@ -25,7 +26,7 @@ vaultName.addEventListener('change', vaultChanged)
 vaultAddress.addEventListener('change', vaultChanged)
 submitBtn.addEventListener('click', addVault)
 deleteBtn.addEventListener('click', deleteVault)
-updateBtn.addEventListener('click', getScore)
+updateBtn.addEventListener('click', getPositionData)
 
 function vaultChanged() {
     submitBtn.disabled = false
@@ -85,7 +86,7 @@ function writeCookie(array) {
     document.cookie = `stakewiseVaults=${arrayStr}`
 }
 
-async function getScore() {
+async function getPositionData() {
     const nameAddr = vaultEl.value.split(': ')
     vaultName.value = nameAddr[0]
     vaultAddress.value = nameAddr[1]
@@ -93,18 +94,22 @@ async function getScore() {
         deleteBtn.disabled = false
     }
 
-    const scoring = await sdk.vault.getScoring({
-        vaultAddress: nameAddr[1],
+    const output = await sdk.vault.getExitQueuePositions({
+        userAddress: "0x2365887bBdb7fF611F54b380573a5055170fAE7D",
+        vaultAddress: nameAddr[1]
     })
 
-    consensusRewardsEarned.innerText = `Consensus Rewards Earned: ${ethers.formatEther(scoring.consensusRewardsEarned)}`
-    consensusRewardsMissed.innerText = `Consensus Rewards Missed: ${ethers.formatEther(scoring.consensusRewardsMissed)}`
-    executonMevEarned.innerText = `Execution MEV Earned: ${ethers.formatEther(scoring.executionMevEarned)}`
-    executonMevMissed.innerText = `Execution MEV Missed: ${ethers.formatEther(scoring.executionMevMissed)}`
+    total.innerText = `Total: ${ethers.formatEther(output.total)}`
+    withdrawable.innerText = `Withdrawable: ${output.withdrawable}`
+    console.log(output.positions)
+//     exitQueueIndex.innerText = `Exit Queue Index: ${output.positions[0].exitQueueIndex}`
+//     positionTicket.innerText = `Position Ticket: ${output.positions[0].positionTicket}`
+//     timestamp.innerText = `Timestamp: ${output.positions[0].timestamp}`
 }
 
 function setupInputs() {
     const cookie = getCookie("stakewiseVaults")
+
     if (cookie != "") {
         const array = cookie.split('=')
         vaultsArray = JSON.parse(array[1])
