@@ -14,19 +14,13 @@ const deleteBtn = document.getElementById('delete-btn')
 const vaultEl = document.getElementById('vault-el')
 const updateBtn = document.getElementById('update-btn')
 
-const total = document.getElementById('total')
-const withdrawable = document.getElementById('withdrawable')
-const exitQueueIndex = document.getElementById('exit-queue-index')
-const positionTicket = document.getElementById('position-ticket')
-const timestamp = document.getElementById('timestamp')
-
 const genesisVaultAddress = '0xAC0F906E433d58FA868F936E8A43230473652885'
 
 vaultName.addEventListener('change', vaultChanged)
 vaultAddress.addEventListener('change', vaultChanged)
 submitBtn.addEventListener('click', addVault)
 deleteBtn.addEventListener('click', deleteVault)
-updateBtn.addEventListener('click', getPositionData)
+updateBtn.addEventListener('click', getVaultData)
 
 function vaultChanged() {
     submitBtn.disabled = false
@@ -86,7 +80,7 @@ function writeCookie(array) {
     document.cookie = `stakewiseVaults=${arrayStr}`
 }
 
-async function getPositionData() {
+async function getVaultData() {
     const nameAddr = vaultEl.value.split(': ')
     vaultName.value = nameAddr[0]
     vaultAddress.value = nameAddr[1]
@@ -94,13 +88,23 @@ async function getPositionData() {
         deleteBtn.disabled = false
     }
 
-    const output = await sdk.vault.getExitQueuePositions({
-        userAddress: "0x2365887bBdb7fF611F54b380573a5055170fAE7D",
+    const output = await sdk.vault.getVault({
         vaultAddress: nameAddr[1]
     })
 
-    total.innerText = `Total: ${ethers.formatEther(output.total)}`
-    withdrawable.innerText = `Withdrawable: ${output.withdrawable}`
+    document.getElementById("apy").textContent = `APY: ${output.apy}`
+    document.getElementById("isErc20").textContent = `isERC20: ${output.isERC20}`
+    document.getElementById("capacity").textContent = `Capacity: ${output.capacity}`
+    document.getElementById("feePercent").textContent = `Fee Percent: ${output.feePercent}`
+    document.getElementById("totalAssets").textContent = `Total Assets: ${output.totalAssets}`
+    document.getElementById("mevRecipient").textContent = `MEV Recipient: ${output.mevRecipient}`
+    document.getElementById("whitlistCount").textContent = `Whitelist Count: ${output.whitlistCount}`
+    document.getElementById("blocklistCount").textContent = `Blocklist Count: ${output.blocklistCount}`
+    document.getElementById("isSmoothingPool").textContent = `isSmoothingPool: ${output.isSmoothingPool}`
+    document.getElementById("tokenName").textContent = `Token Name: ${output.tokenName}`
+    document.getElementById("tokenSymbol").textContent = `Token Symbol: ${output.tokenSymbol}`
+    document.getElementById("displayName").textContent = `Display Name: ${output.displayName}`
+    document.getElementById("performance").textContent = `Performance: ${output.performance}`
 }
 
 function setupInputs() {

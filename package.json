@@ -4,7 +4,7 @@
   "version": "1.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite --port 5100",
+    "dev": "vite --port 5400",
     "build": "vite build",
     "preview": "vite preview"
   },
@@ -13,7 +13,7 @@
     "vite-plugin-graphql-loader": "^2.0.0"
   },
   "dependencies": {
-    "@stakewise/v3-sdk": "file:stakewise-v3-sdk-1.1.0.tgz",
+    "@stakewise/v3-sdk": "^1.3.0",
     "ethers": "^6.9.2"
   }
 }
